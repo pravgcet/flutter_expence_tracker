@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expence_tracker/models/expense.dart';
 import 'package:flutter_expence_tracker/widgets/expences_list/expense_list.dart';
+import 'package:flutter_expence_tracker/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -12,6 +13,7 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+
   final List<Expense> _registeredExpenses = [
     Expense(
       title: "Room Rent",
@@ -33,6 +35,11 @@ class _ExpensesState extends State<Expenses> {
     )
   ];
 
+  void _addExpense() {
+    showModalBottomSheet(
+        context: context, builder: (ctx) => const NewExpense());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +47,7 @@ class _ExpensesState extends State<Expenses> {
         title: Center(child: Text('Expense Tracker')),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _addExpense,
             icon: Icon(Icons.add),
           )
         ],
